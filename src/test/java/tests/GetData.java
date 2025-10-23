@@ -8,12 +8,12 @@ import payloads.Payload;
 
 public class GetData {
     CollectionAPI userApi = new CollectionAPI();
+
     @Test
-    public void userLogin(){
-        System.out.println("login user");
-        String reqBody = Payload.userValidLogin("eve.holt@reqres.in", "pistol");
-        Response response = userApi.userLogin(reqBody);
-        Assert.assertEquals(response.getStatusCode(), 200, "Success Login");
-        System.out.println(response.asPrettyString());
+    public void getUsers() {
+        System.out.println("get all users");
+        Response response = userApi.getAllUsers(5);
+        Assert.assertEquals(response.getStatusCode(), 200, "Page request should return 200 OK");
+        response.prettyPrint();
     }
 }
