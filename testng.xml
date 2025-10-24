@@ -5,7 +5,12 @@
 
     <test name="first run">
         <classes>
-            <class name="tests.GetData" />
+            <class name="tests.CreateUserTest" />
+        </classes>
+    </test>
+    <test name="second run">
+        <classes>
+            <class name="tests.GetUsersTest" />
         </classes>
     </test>
 
