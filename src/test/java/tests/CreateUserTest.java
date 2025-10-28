@@ -76,17 +76,17 @@ public class CreateUserTest {
         System.out.println("stored id"+TestData.createdId);
     }
 
-    @Test
-    public void validateSchemaCreateUser() {
-        Response response = collectionAPI.getAllUsers(1);
-        response.then()
-                .assertThat()
-                .statusCode(200)
-                .body(JsonSchemaValidator.matchesJsonSchema(
-                        new File("src/test/resources/schemas/createUser.json")));
-
-        System.out.println("Schema validation passed for /user?limit=1");
-    }
+//    @Test
+//    public void validateSchemaCreateUser() {
+//        Response response = collectionAPI.getAllUsers(1);
+//        response.then()
+//                .assertThat()
+//                .statusCode(200)
+//                .body(JsonSchemaValidator.matchesJsonSchema(
+//                        new File("src/test/resources/schemas/createUser.json")));
+//
+//        System.out.println("Schema validation passed for /user?limit=1");
+//    }
 
     @Test(dependsOnMethods = {"createUser"})
     public void createUserDuplicatedEmail() {

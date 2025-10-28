@@ -10,21 +10,21 @@ import java.io.File;
 public class GetUsersTest {
     CollectionAPI userApi = new CollectionAPI();
 
-//    @Test
-//    public void validateGetUsersSchema() {
-//        Response response = userApi.getAllUsers(1);
-//        int limit = response.jsonPath().getInt("limit");
-//        int dataSize = response.jsonPath().getList("data").size();
-//        Assert.assertTrue(dataSize <= limit, "Returned data count exceeds requested limit");
-//
-//        response.then()
-//                .assertThat()
-//                .statusCode(200)
-//                .body(JsonSchemaValidator.matchesJsonSchema(
-//                        new File("src/test/resources/schemas/users_schema.json")));
-//
-//        System.out.println("Schema validation passed for /user?limit=1");
-//    }
+    @Test
+    public void validateGetUsersSchema() {
+        Response response = userApi.getAllUsers(1);
+        int limit = response.jsonPath().getInt("limit");
+        int dataSize = response.jsonPath().getList("data").size();
+        Assert.assertTrue(dataSize <= limit, "Returned data count exceeds requested limit");
+
+        response.then()
+                .assertThat()
+                .statusCode(200)
+                .body(JsonSchemaValidator.matchesJsonSchema(
+                        new File("src/test/resources/schemas/users_schema.json")));
+
+        System.out.println("Schema validation passed for /user?limit=1");
+    }
 
     @Test
     public void getUsersWithVariousLimit() {
