@@ -1,0 +1,49 @@
+name: 🧪 API Automation Tests
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  run-tests:
+    name: Run API Tests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 🧰 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ☕ Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'maven'
+
+      - name: 🧩 Verify Maven
+        run: mvn -v
+
+      - name: 📦 Install dependencies & run TestNG tests
+        run: mvn clean test -Dsurefire.suiteXmlFiles=testng.xml
+
+      - name: 📜 Upload TestNG report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: testng-report
+          path: target/surefire-reports/
+
+      # --- Optional: Allure Report Support ---
+      # Uncomment these lines if you have Allure plugin configured in pom.xml
+      # - name: 🧱 Generate Allure Report
+      #   if: always()
+      #   run: mvn allure:report
+      #
+      # - name: 📊 Upload Allure HTML report
+      #   if: always()
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: allure-report
+      #     path: target/site/allure-maven-plugin/
