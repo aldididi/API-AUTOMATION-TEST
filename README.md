@@ -1,6 +1,6 @@
 ## API Automation Dummy Project
 
-This project provides automated tests for the [https://reqres.in/#try-api] API using Java, TestNG, RestAssured.
+This project provides automated tests for the https://dummyapi.io/sign-in API using Java, TestNG, RestAssured.
 
 ### Prerequisites
 
