@@ -1,6 +1,7 @@
 package tests;
 
 import apiengine.CollectionAPI;
+import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
 import org.example.utils.TestData;
 import org.testng.annotations.BeforeClass;
@@ -9,6 +10,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import payloads.Payload;
 
+import java.io.File;
 import java.util.UUID;
 
 public class CreateUserTest {
@@ -72,6 +74,18 @@ public class CreateUserTest {
         TestData.createdId = response.jsonPath().getString("id");
         System.out.println("stored email:"+TestData.createdEmail);
         System.out.println("stored id"+TestData.createdId);
+    }
+
+    @Test
+    public void validateSchemaCreateUser() {
+        Response response = collectionAPI.getAllUsers(1);
+        response.then()
+                .assertThat()
+                .statusCode(200)
+                .body(JsonSchemaValidator.matchesJsonSchema(
+                        new File("src/test/resources/schemas/createUser.json")));
+
+        System.out.println("Schema validation passed for /user?limit=1");
     }
 
     @Test(dependsOnMethods = {"createUser"})

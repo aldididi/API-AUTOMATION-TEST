@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "User Schema",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "firstName",
+    "lastName",
+    "picture",
+    "gender",
+    "email",
+    "dateOfBirth",
+    "phone",
+    "location",
+    "registerDate",
+    "updatedDate"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9]+$"
+    },
+    "title": {
+      "type": "string",
+      "enum": ["mr", "mrs", "miss", "ms", "dr"]
+    },
+    "firstName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "lastName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "picture": {
+      "type": "string",
+      "format": "uri"
+    },
+    "gender": {
+      "type": "string",
+      "enum": ["male", "female"]
+    },
+    "email": {
+      "type": "string",
+      "format": "email"
+    },
+    "dateOfBirth": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "phone": {
+      "type": "string",
+      "pattern": "^[0-9]+$"
+    },
+    "location": {
+      "type": "object",
+      "required": ["street", "city", "state", "country", "timezone"],
+      "properties": {
+        "street": { "type": "string" },
+        "city": { "type": "string" },
+        "state": { "type": "string" },
+        "country": { "type": "string" },
+        "timezone": { "type": "string" }
+      }
+    },
+    "registerDate": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedDate": {
+      "type": "string",
+      "format": "date-time"
+    }
+  },
+  "additionalProperties": false
+}
